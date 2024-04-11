@@ -1,9 +1,16 @@
 # Colorización de imágenes con GANs
-Xander Gallegos <aranxa.gallegos@iteso.mx>
+Xander Gallegos 
++ <aranxa.gallegos@iteso.mx>
 
 Este proyecto retoma la investigación anterior que abordó la colorización de imágenes mediante la implementación de autoencoders convolucionales ([Image-Colorization](https://github.com/xagallegos/Image-Colorization)). A pesar de que estos métodos demostraron cierto grado de capacidad para representar y generar imágenes a color, se encontró que los resultados obtenidos no cumplían con los estándares deseados en términos de claridad y calidad visual. Estas limitaciones han impulsado la exploración de nuevas metodologías, como las Generative Adversarial Networks (GANs). Esta arquitectura de redes neuronales ha demostrado habilidades destacadas en la generación de datos realistas y la captura de distribuciones de alta dimensión, lo que motiva la transición hacia el uso de GANs en este proyecto para abordar nuevamente el desafío de la colorización de imágenes en escala de grises.
 
+## Resultados
+![output-result](output-examples/Colorization_01.png)
+
 Este proyecto se fundamenta completamente en el paper [*"Image-to-Image Translation with Conditional Adversarial Networks"*](https://arxiv.org/pdf/1611.07004.pdf) o más conocido como pix2pix, que propone una solución general a varios problemas de image-to-image, incluida la colorización. Además, se implementan modificaciones en el generador inspiradas en las propuestas de Moein Shariatnia en su [repositorio de GitHub](https://github.com/moein-shariatnia/Deep-Learning/tree/main/Image%20Colorization%20Tutorial). Estas adaptaciones buscan mejorar aún más el rendimiento y la calidad de la colorización de imágenes en escala de grises mediante la optimización de la arquitectura del generador dentro del marco de pix2pix.
+
+## Datos
+Para el entrenamiento del modelo, se optó por utilizar el dataset Places365 debido a su amplia diversidad de entornos, lo que se espera haya permitido al modelo aprender características representativas de una amplia gama de escenarios y haya contribuido al poder de generalización del modelo. Cabe aclarar que, dado el tamaño considerable del dataset completo, se utilizó un subset de más de 36k imágenes obtenido de [Kaggle](https://www.kaggle.com/datasets/pankajkumar2002/places365) más acorde con los recursos destinados al proyecto.
 
 ## Arquitectura
 ### Generador
@@ -19,3 +26,6 @@ Como función de pérdida se usa `BCEWithLogitsLoss`, esta combina una capa sigm
 
 ## Métricas de evaluación
 Tomando como referencia el trabajo de Isola et al. (2017) en *‘Image-to-Image Translation with Conditional Adversarial Networks’*, el objetivo final de trabajos como la colorización suele ser la plausibilidad para un observador humano, por lo tanto, se evaluará el modelo usando este enfoque.
+
+## Conclusiones
+Los resultados obtenidos superaron ampliamente las expectativas dadas las limitaciones de recursos y tiempo asignados al proyecto. Sin embargo, se han identificado algunos problemas significativos en el modelo. Por ejemplo, al enfrentarse a imágenes con áreas muy blancas, las cuales son atípicas en la distribución de colores del conjunto de datos, el modelo tiende a generar rellenos con colores que resultan claramente incorrectos para el ojo humano. No obstante, se plantea la hipótesis de que estos problemas podrían corregirse fácilmente con más entrenamiento, posiblemente mediante una orientación específica hacia este tipo de imágenes.
